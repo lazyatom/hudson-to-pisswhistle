@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require "hudson_to_pisswhistle"
+
+HudsonToPissWhistle.run

@@ -1,0 +1,7 @@
+This is a simple script that allows Hudson to post build information to another service.
+
+You'll need to install the 'post-build task' plugin, and then set the script to something like this:
+
+    HOST=localhost:5032 STREAM=freerange OAUTH_KEY=MyKey123 hudson-to-pisswhistle &
+
+It's important to remember to run this in the background, because the script needs to wait for the build to finish before build.xml is actually written. That's a pain, but what can you do.
