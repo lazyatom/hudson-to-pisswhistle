@@ -16,7 +16,7 @@ context "Given a build.xml file in a workspace" do
     ENV["HOST"] = nil
     ENV["OAUTH_TOKEN"] = "token"
 
-    @net_lib = stub('net-library')
+    @net_lib = stub('net-library', :post => nil)
   end
 
   context "when running the script" do
@@ -53,6 +53,12 @@ context "Given a build.xml file in a workspace" do
       xml_as_hash = {:build => {:result => "SUCCESS", "another-key" => "blah"}}
       xml_as_json = xml_as_hash.merge(:message => "The change message for this build", :result => "SUCCESS").to_json
       @net_lib.expects(:post).with(anything, has_entry(:query => has_entry(:payload => matching_json(xml_as_json))))
+    end
+
+    %w(STREAM OAUTH_TOKEN WORKSPACE BUILD_ID).each do |setting|
+      raises "if no #{setting} is set in the environment" do
+        ENV[setting] = nil
+      end
     end
   end
 

@@ -56,6 +56,20 @@ module Doing
       instance_eval(&doing_block)
     end
   end
+
+  def raises(message, &block)
+    doing_block = @doing
+    test "raises #{message}" do
+      instance_eval(&block)
+      exception = nil
+      begin
+        instance_eval(&doing_block)
+      rescue Exception => e
+        exception = e
+      end
+      assert exception != nil, "should raise #{message}"
+    end
+  end
 end
 
 Kintama.extend Doing
