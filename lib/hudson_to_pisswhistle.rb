@@ -14,7 +14,7 @@ class HudsonToPissWhistle
 
   def self.run(net_client=HTTParty)
     %w(STREAM OAUTH_TOKEN WORKSPACE BUILD_ID).each do |setting|
-      raise unless ENV[setting]
+      raise "#{setting} was not set" unless ENV[setting]
     end
 
     build_directory = File.expand_path(File.join(ENV["WORKSPACE"], "..", "builds", ENV["BUILD_ID"]))

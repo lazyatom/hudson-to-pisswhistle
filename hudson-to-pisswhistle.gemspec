@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email = %q{james@lazyatom.com}
   s.executables = ["hudson-to-pisswhistle"]
   s.extra_rdoc_files = ["README"]
-  s.files = ["README", "bin/hudson-to-pisswhistle"]
+  s.files = ["README", "bin/hudson-to-pisswhistle", "lib/hudson_to_pisswhistle.rb"]
   s.homepage = %q{http://gofreerange.com}
   s.rdoc_options = ["--main", "README"]
   s.require_paths = ["lib"]

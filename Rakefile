@@ -31,7 +31,7 @@ spec = Gem::Specification.new do |s|
   s.rdoc_options      = %w(--main README)
 
   # Add any extra files to include in the gem (like your README)
-  s.files             = %w(README) + Dir.glob("{bin}/**/*")
+  s.files             = %w(README) + Dir.glob("{bin,lib}/**/*")
   s.executables       = FileList["bin/**"].map { |f| File.basename(f) }
 
   # You need to put your code in a directory which can then be added to
@@ -40,7 +40,7 @@ spec = Gem::Specification.new do |s|
   # directory your code is in. Rubygems is going to assume lib if you leave
   # this blank.
   #
-  # s.require_paths = ["lib"]
+  s.require_paths = ["lib"]
 
   # If you want to depend on other gems, add them here, along with any
   # relevant versions
