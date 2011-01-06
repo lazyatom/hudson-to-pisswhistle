@@ -17,6 +17,7 @@ class HudsonToPissWhistle
       raise "#{setting} was not set" unless ENV[setting]
     end
 
+    project_name = ENV["WORKSPACE"].split("/")[-2]
     build_directory = File.expand_path(File.join(ENV["WORKSPACE"], "..", "builds", ENV["BUILD_ID"]))
     build_log = File.join(build_directory, "build.xml")
 
@@ -33,7 +34,13 @@ class HudsonToPissWhistle
 
     data = change_dots_to_hyphens_in_keys(data)
 
-    data["message"] = File.read(File.join(build_directory, "changelog.xml")).strip
+    data["changelog"] = File.read(File.join(build_directory, "changelog.xml")).strip
+    revision = data["changelog"].split(" ").last
+    data["message"] = if data["build"]["result"] == "SUCCESS"
+      "#{project_name} (#{revision}) built successfully"
+    else
+      "#{project_name} (#{revision}) failed!"
+    end
 
     # legacy CI message compatibility
     data["result"] = data["build"]["result"]
