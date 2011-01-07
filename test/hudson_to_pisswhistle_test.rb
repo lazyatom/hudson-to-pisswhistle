@@ -4,9 +4,7 @@ context "Given a build.xml file in a workspace, when running the script" do
   include HudsonBuildHelper
 
   def build_xml_string
-    %{<build>
-        <result>SUCCESS</result>
-      </build>}.strip
+    "<build><result>SUCCESS</result></build>"
   end
 
   def changelog
@@ -92,7 +90,7 @@ context "Given a build.xml file in a workspace, when running the script" do
         %{<build>
             <result>SUCCESS</result>
             <another.key>blah</another.key>
-          </build>}.strip
+          </build>}
       end
 
       should "convert xml keys with dots to dashes" do
@@ -102,12 +100,7 @@ context "Given a build.xml file in a workspace, when running the script" do
 
     context "when the build failed" do
       def build_xml_string
-        %{
-          <build>
-            <result>FAILURE</result>
-            <another.key>blah</another.key>
-          </build>
-        }
+        "<build><result>FAILURE</result></build>"
       end
 
       should "include a failure message" do
