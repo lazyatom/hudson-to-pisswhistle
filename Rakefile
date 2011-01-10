@@ -18,9 +18,9 @@ spec = Gem::Specification.new do |s|
 
   # Change these as appropriate
   s.name              = "hudson-to-pisswhistle"
-  s.version           = "0.1.1"
+  s.version           = "0.1.2"
   s.summary           = "Gathers build data from hudson and posts it to a URL"
-  s.author            = "James Adam"
+  s.author            = "James Adam, James Mead"
   s.email             = "james@lazyatom.com"
   s.homepage          = "http://gofreerange.com"
 
