@@ -5,10 +5,17 @@ require 'json'
 
 class HudsonToPissWhistle
   # Hudson's XML keys contain dots, but BSON doesn't like that.
-  def self.change_dots_to_hyphens_in_keys(hash)
-    hash.inject({}) do |h, (k,v)|
-      h[k.to_s.gsub(".", "-")] = v.is_a?(Hash) ? change_dots_to_hyphens_in_keys(v) : v
-      h
+  def self.change_dots_to_hyphens_in_keys(hash_or_array)
+    case hash_or_array
+    when Hash
+      hash_or_array.inject({}) do |h, (k,v)|
+        h[k.to_s.gsub(".", "-")] = change_dots_to_hyphens_in_keys(v)
+        h
+      end
+    when Array
+      hash_or_array.map { |value| change_dots_to_hyphens_in_keys(value) }
+    else
+      hash_or_array
     end
   end
 

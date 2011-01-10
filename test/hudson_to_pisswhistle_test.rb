@@ -98,6 +98,22 @@ context "Given a build.xml file in a workspace, when running the script" do
       end
     end
 
+    context "when lots of varyingly-nested xml keys with dots exist" do
+      def build_xml_string
+        %{<build>
+            <result>SUCCESS</result>
+            <another.key>
+              <thing><more.dots>123</more.dots></thing>
+              <thing><more.dots>456</more.dots></thing>
+            </another.key>
+          </build>}
+      end
+
+      should "convert xml keys with dots to dashes" do
+        assert_equal [{"more-dots" => "123"}, {"more-dots" => "456"}], @net_lib.payload["build"]["another-key"]["thing"]
+      end
+    end
+
     context "when the build failed" do
       def build_xml_string
         "<build><result>FAILURE</result></build>"
